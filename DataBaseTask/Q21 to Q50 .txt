@@ -1,0 +1,147 @@
+Q-21. Write an SQL query to fetch the count of employees working in the department ‘Admin’.
+Ans.
+select count(*) from worker where department ='Admin'
+-------------------------------------------------------------------------------------------------------------
+
+Q-22. Write an SQL query to fetch worker names with salaries >= 50000 and <= 100000.
+Ans.
+SELECT FIRST_NAME ||' ' || LAST_NAME AS COMPLETE_NAME , SALARY FROM WORKER WHERE SALARY BETWEEN 50000 AND 100000;
+------------------------------------------------------------------------------------------------------------
+
+Q-23. Write an SQL query to fetch the number of workers for each department in descending order.
+Ans.
+SELECT department, COUNT(*) as number  FROM WORKER GROUp by  department order by number desc
+------------------------------------------------------------------------------------------------------------
+
+Q-24. Write an SQL query to print details of the Workers who are also Managers.
+Ans.
+select *, WORKER_TITLE from worker w , title t where w.WORKER_ID=t.WORKER_REF_ID and WORKER_TITLE='Manager';
+------------------------------------------------------------------------------------------------------------
+ 
+Q-25. Write an SQL query to fetch duplicate records having matching data in some fields of a table.
+Ans.
+SELECT WORKER_TITLE, AFFECTED_FROM, COUNT(*) FROM Title GROUP BY WORKER_TITLE, AFFECTED_FROM HAVING COUNT(*) > 1;
+------------------------------------------------------------------------------------------------------------
+
+Q-26. Write an SQL query to show only odd rows from a table.
+Ans.
+select* from worker where WORKER_ID%2!=0;
+------------------------------------------------------------------------------------------------------------
+
+Q-27. Write an SQL query to show only even rows from a table.
+Ans.
+select* from worker where WORKER_ID%2=0;
+------------------------------------------------------------------------------------------------------------
+
+Q-28. Write an SQL query to clone a new table from another table.
+Ans.
+CREATE TABLE new_table AS SELECT * FROM Worker;
+------------------------------------------------------------------------------------------------------------
+
+Q-29. Write an SQL query to fetch intersecting records of two tables.
+Ans
+select* from worker intersect select* from new_table;
+------------------------------------------------------------------------------------------------------------
+Q-30. Write an SQL query to show records from one table that another table does not have.
+Ans.
+select* from worker except select * from new_table
+------------------------------------------------------------------------------------------------------------
+Q-31. Write an SQL query to show the current date and time.
+SELECT CURRENT_TIMESTAMP;
+------------------------------------------------------------------------------------------------------------
+Q-32. Write an SQL query to show the top n (say 10) records of a table.
+Ans.
+select * from worker order by salary desc limit 10;
+------------------------------------------------------------------------------------------------------------
+Q-33. Write an SQL query to determine the nth (say n=5) highest salary from a table.
+Ans.
+select  distinct salary from  worker order by salary desc limit 1  offset 4;
+------------------------------------------------------------------------------------------------------------
+Q-34. Write an SQL query to determine the 5th highest salary without using the TOP or limit method.
+Ans.
+SELECT Salary FROM Worker W1 WHERE 4 = (SELECT COUNT(DISTINCT W2.Salary) FROM Worker W2 WHERE W2.Salary >= W1.Salary);
+------------------------------------------------------------------------------------------------------------
+Q-35. Write an SQL query to fetch the list of employees with the same salary.
+Ans.
+SELECT distinct W.WORKER_ID, W.FIRST_NAME, W.Salary from Worker W, Worker W1 where W.Salary = W1.Salary and W.WORKER_ID != W1.WORKER_ID;
+------------------------------------------------------------------------------------------------------------
+Q-36. Write an SQL query to show the second-highest salary from a table.
+Ans.
+select salary from worker order by salary desc limit 1 offset 2
+------------------------------------------------------------------------------------------------------------
+Q-37. Write an SQL query to show one row twice in the results from a table.
+Ans.
+select* from worker
+union all
+select* from worker;
+------------------------------------------------------------------------------------------------------------
+
+Q-38. Write an SQL query to fetch intersecting records of two tables.
+Ans.
+select* from worker intersect select* from new_table
+------------------------------------------------------------------------------------------------------------
+Q-39. Write an SQL query to fetch the first 50% of records from a table.
+Ans.
+SELECT * FROM WORKER WHERE WORKER_ID <= (SELECT count(WORKER_ID)/2 from Worker);
+------------------------------------------------------------------------------------------------------------
+Q-40. Write an SQL query to fetch the departments that have less than five people in them.
+Ans.
+select DEPARTMENT , count(*) from worker group by DEPARTMENT  having count(*)<5
+------------------------------------------------------------------------------------------------------------
+
+Q-41. Write an SQL query to show all departments along with the number of people in there.
+Ans.
+
+select DEPARTMENT , count(*) from worker group by DEPARTMENT
+------------------------------------------------------------------------------------------------------------
+
+Q-42. Write an SQL query to show the last record from a table.
+Ans.
+select* from worker order by WORKER_ID desc limit 1
+------------------------------------------------------------------------------------------------------------
+
+Q-43. Write an SQL query to fetch the first row of a table.
+Ans.
+select* from worker  limit 1
+------------------------------------------------------------------------------------------------------------
+
+Q-44. Write an SQL query to fetch the last five records from a table.
+Ans.
+select* from worker order by WORKER_ID desc limit 5
+------------------------------------------------------------------------------------------------------------
+
+Q-45. Write an SQL query to print the names of employees having the highest salary in each department.
+Ans.
+select first_name , salary from worker group by department having max(salary)
+------------------------------------------------------------------------------------------------------------
+
+Q-46. Write an SQL query to fetch three max salaries from a table.
+Ans.
+select distinct salary from worker order by salary desc limit 3
+------------------------------------------------------------------------------------------------------------
+
+Q-47. Write an SQL query to fetch three min salaries from a table.
+Ans.
+SELECT salary
+FROM (
+    SELECT salary
+    FROM worker
+    ORDER BY salary ASC
+    LIMIT 3
+) AS temp
+ORDER BY salary DESC;
+------------------------------------------------------------------------------------------------------------
+
+Q-48. Write an SQL query to fetch nth max salaries from a table.
+Ans.
+select  distinct salary from worker order by salary desc  limit 5
+------------------------------------------------------------------------------------------------------------
+
+Q-49. Write an SQL query to fetch departments along with the total salaries paid for each of them.
+Ans.
+select department ,sum(salary) from worker group by department 
+------------------------------------------------------------------------------------------------------------
+
+Q-50. Write an SQL query to fetch the names of workers who earn the highest salary.
+Ans.
+select FIRST_NAME ,salary from worker where salary=(select max(salary) from worker)
