@@ -8,7 +8,7 @@
 
         <!-- JDBC Database connection settings -->
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/t3hibernate</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/t4hibernate</property>
         <property name="connection.username">root</property>
         <property name="connection.password">123456</property>
 
@@ -16,7 +16,7 @@
         <property name="show_sql">true</property>
 
         <!-- Select our SQL dialect -->
-        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
 
         <!-- JDBC connection pool settings ... using built-in test pool -->
         <property name="connection.pool_size">4</property>
@@ -25,7 +25,7 @@
         <property name="current_session_context_class">thread</property>
 
         <!-- hibernate mapping to ddl -->
-        <property name="hbm2ddl.auto">create</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
 
 
     </session-factory>
