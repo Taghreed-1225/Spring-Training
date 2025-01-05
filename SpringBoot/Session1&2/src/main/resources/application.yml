@@ -1,0 +1,16 @@
+server:
+  port: 8081
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+#custom configuration
+myapp:
+  name: "user service"
+  description:
+    title : "service1"
+    fullDescription: "this is service  to handle users"
