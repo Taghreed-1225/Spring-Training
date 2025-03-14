@@ -1,0 +1,4 @@
+From openjdk:17
+COPY target/dockerjava.jar dockerjava.jar
+EXPOSE 8081
+ENTRYPOINT ["java","-jar","dockerjava.jar"]
